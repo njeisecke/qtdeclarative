@@ -2327,6 +2327,8 @@ QQuickItem::~QQuickItem()
     while (!d->childItems.isEmpty())
         d->childItems.constFirst()->setParentItem(nullptr);
 
+    qDebug() << "QQuickItem::~QQuickItem" << this;
+
     d->notifyChangeListeners(QQuickItemPrivate::AllChanges, [this](const QQuickItemPrivate::ChangeListener &change){
         QQuickAnchorsPrivate *anchor = change.listener->anchorPrivate();
         if (anchor)

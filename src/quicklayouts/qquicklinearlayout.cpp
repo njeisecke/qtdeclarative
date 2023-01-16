@@ -407,6 +407,8 @@ int QQuickGridLayoutBase::itemCount() const
 
 void QQuickGridLayoutBase::removeGridItem(QGridLayoutItem *gridItem)
 {
+    qCDebug(lcQuickLayouts) << "QQuickGridLayoutBase::removeGridItem" << gridItem << isReady();
+
     Q_D(QQuickGridLayoutBase);
     const int index = gridItem->firstRow(d->orientation);
     d->engine.removeItem(gridItem);
@@ -415,6 +417,8 @@ void QQuickGridLayoutBase::removeGridItem(QGridLayoutItem *gridItem)
 
 void QQuickGridLayoutBase::itemDestroyed(QQuickItem *item)
 {
+    qCDebug(lcQuickLayouts) << "QQuickGridLayoutBase::PUPS" << (void*) item << isReady();
+
     if (!isReady())
         return;
     Q_D(QQuickGridLayoutBase);
@@ -732,6 +736,7 @@ void QQuickGridLayout::insertLayoutItems()
         column = nextColumn;
         row = nextRow;
         QQuickGridLayoutItem *layoutItem = new QQuickGridLayoutItem(child, row, column, rowSpan, columnSpan, alignment);
+	qCDebug(lcQuickLayouts) << "QQuickGridLayout::insertLayoutItems(): child" << child << "item" << layoutItem;
         d->engine.insertItem(layoutItem, -1);
     }
 }
@@ -838,6 +843,7 @@ void QQuickLinearLayout::insertLayoutItems()
         if (d->orientation == Qt::Vertical)
             qSwap(gridRow, gridColumn);
         QQuickGridLayoutItem *layoutItem = new QQuickGridLayoutItem(child, gridRow, gridColumn, 1, 1, alignment);
+	qCDebug(lcQuickLayouts) << "QQuickLinearLayout::insertLayoutItems(): child" << child << "item" << layoutItem;
         d->engine.insertItem(layoutItem, index);
     }
 }

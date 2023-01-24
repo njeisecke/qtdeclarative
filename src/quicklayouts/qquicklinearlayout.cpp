@@ -436,7 +436,7 @@ void QQuickGridLayoutBase::itemVisibilityChanged(QQuickItem *item)
 
     if (!isReady())
         return;
-    qCDebug(lcQuickLayouts) << "QQuickGridLayoutBase::itemVisibilityChanged()";
+    qCDebug(lcQuickLayouts) << "QQuickGridLayoutBase::itemVisibilityChanged()" << item;
     invalidate(item);
 }
 
